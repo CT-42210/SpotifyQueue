@@ -69,5 +69,5 @@ ts-gen
 
 # Used to accelerate builds after sync
 patches/mtime-cache.json
-/.cache
-/.cache-tdbxvzlwqn9f4md0p81abbk3a
+
+/.cache-nicho
