@@ -41,7 +41,7 @@ def index():
         song_name = request.form.get('song_name')
         if not song_name:
             return "Error: No search query provided", 400
-        results = sp.search(q=song_name, limit=20, type='track')
+        results = sp.search(q=song_name, limit=5, type='track')
 
         return render_template('results.html', results=results['tracks']['items'], current_track=current_track)
 
