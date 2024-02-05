@@ -2,7 +2,8 @@
 
 A simple web app so party-goers can add their favorite songs to the queue but can't skip songs that others added. 
 
-In it's current state, port `5000` must be opened, either to the internet or your local network. I use the Ngrok endpoint `https://spotifyqueue.ngrok.app`
+In it's current state, port `5000` must be opened, either to the internet or your local network.
+You can also use ngrok to open the port. 
 
 Built using Python Flask and Bootstrap.
 
