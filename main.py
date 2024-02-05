@@ -1,16 +1,19 @@
 from flask import Flask, request, redirect, url_for, session, render_template
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
+from dotenv import load_dotenv
+import os
 
-# Set up your Spotify developer credentials
-client_id = '01468e22e5fc423586658612d5f5f9ed'
-client_secret = '571693f03b6d4c0099064d69ff920624'
-redirect_uri = 'http://localhost:5000/callback'
-username = 'tdbxvzlwqn9f4md0p81abbk3a'
+load_dotenv()
+
+client_id = os.getenv('ID')
+client_secret = os.getenv('SECRET')
+redirect_uri = os.getenv('REDIRECT')
+username = os.getenv('USERNAME')
 scope = 'user-modify-playback-state user-read-playback-state'
 
 app = Flask(__name__)
-app.secret_key = 'ohyeabbg'
+app.secret_key = os.getenv('SECRET_KEY')
 
 sp_oauth = SpotifyOAuth(scope=scope, client_id=client_id, client_secret=client_secret, redirect_uri=redirect_uri,
                         username=username)
@@ -32,10 +35,10 @@ def index():
 
     sp = spotipy.Spotify(auth=session['token_info']['access_token'])
     playback_info = sp.current_playback()
-    current_track = playback_info['item']
-    if current_track == None:
-        current_track = 'No Song Playing'
-
+    if playback_info is None:
+        current_track = {'artists': [{'name': 'No Song Playing'}]}
+    else:
+        current_track = playback_info['item']
 
     print(session['played_songs'])
 
@@ -48,6 +51,7 @@ def index():
         return render_template('results.html', results=results['tracks']['items'], current_track=current_track)
 
     return render_template('index.html', current_track=current_track)
+
 
 @app.route('/callback')
 def callback():
@@ -76,6 +80,7 @@ def play(song_uri):
     sp.add_to_queue(song_uri)
 
     return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)

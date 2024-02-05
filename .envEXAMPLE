@@ -1,0 +1,7 @@
+# spotify stuff
+ID=''
+SECRET=''
+REDIRECT=''
+USERNAME=''
+# flask
+SECRET_KEY='' #this thing doesent really matter, just put whatever
