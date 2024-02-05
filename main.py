@@ -55,6 +55,6 @@ def play(song_uri):
 
 
 if __name__ == '__main__':
-    # port = ngrok.connect(authtoken=ngrok_authtoken, service="http", domain="spotifyqueue.ngrok.app", port="5000")
+    # port = ngrok.connect(authtoken=ngrok_authtoken, domain="spotifyqueue.ngrok.app", port="5000")
     # print(f"Ingress established at {port.url()}")
     app.run(debug=True)
