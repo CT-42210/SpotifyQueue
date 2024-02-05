@@ -4,4 +4,6 @@ SECRET=''
 REDIRECT=''
 USERNAME=''
 # flask
-SECRET_KEY='' #this thing doesent really matter, just put whatever
+SECRET-KEY='' #this thing doesent really matter, just put whatever
+# ngrok key
+NGROK=''

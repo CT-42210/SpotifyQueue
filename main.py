@@ -3,6 +3,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from dotenv import load_dotenv
 import os
+import ngrok
 
 load_dotenv()
 
@@ -12,8 +13,10 @@ redirect_uri = os.getenv('REDIRECT')
 username = os.getenv('USERNAME')
 scope = 'user-modify-playback-state user-read-playback-state'
 
+ngrok_authtoken = os.getenv('NGROK')
+
 app = Flask(__name__)
-app.secret_key = os.getenv('SECRET_KEY')
+app.secret_key = os.getenv('SECRET-KEY')
 
 sp_oauth = SpotifyOAuth(scope=scope, client_id=client_id, client_secret=client_secret, redirect_uri=redirect_uri,
                         username=username)
@@ -83,4 +86,6 @@ def play(song_uri):
 
 
 if __name__ == '__main__':
+    port = ngrok.connect(authtoken=ngrok_authtoken, service="http", domain="SpotifyQueue.ngrok.dev", port="50000")
+    print(f"Ingress established at {port.url()}")
     app.run(debug=True)
