@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search</title>
+</head>
+<body>
+    <h1>Search for a song</h1>
+
+    <form method="POST" action="{{ url_for('index') }}">
+        <input type="text" name="song_name" placeholder="Enter song name">
+        <input type="submit" value="Search">
+    </form>
+
+    <h2>Currently playing: {{ current_track.name }} by {{ current_track.artists[0].name }}</h2>
+
+    <h2>Next tracks:</h2>
+    <ul>
+        {% for track in next_tracks %}
+            <li>{{ track.name }} by {{ track.artists[0].name }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

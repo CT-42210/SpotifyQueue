@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Queue</title>
+</head>
+<body>
+    <h1>Now Playing</h1>
+    <p>{{ current_track['name'] }} - {{ current_track['artists'][0]['name'] }}</p>
+
+    <h1>Next in Queue</h1>
+    <ul>
+        {% for track in next_tracks %}
+            <li>{{ track['name'] }} - {{ track['artists'][0]['name'] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
