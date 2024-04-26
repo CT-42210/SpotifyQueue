@@ -4,7 +4,6 @@ from spotipy.oauth2 import SpotifyOAuth
 from dotenv import load_dotenv
 import os
 import spotifySetup
-import ngrok
 
 load_dotenv()
 
@@ -50,11 +49,16 @@ def index():
 
 @app.route('/play/<song_uri>')
 def play(song_uri):
+    with open('log.txt', 'r') as file:
+        played_songs = file.readlines()
+        if song_uri+'\n' in played_songs:
+            return "Error: Song has already been played", 400
+
+    with open('log.txt', 'a') as file:
+        file.write(f"{song_uri}\n")
     sp.add_to_queue(song_uri)
     return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
-    # port = ngrok.connect(authtoken=ngrok_authtoken, domain="spotifyqueue.ngrok.app", port="5000")
-    # print(f"Ingress established at {port.url()}")
     app.run(debug=True)
